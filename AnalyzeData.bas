@@ -3,7 +3,7 @@ Sub AnalazyData():
     
     'Current worksheet ws as a worksheet
     Dim ws As Worksheet
-    
+    Set ws = Application.ActiveSheet
     'Set initial variables for holding the ticket name
     Dim ticket As String
     ticket = " "
@@ -23,6 +23,9 @@ Sub AnalazyData():
     PercentChange = 0
     
     '-----------------------------------------------------
+    'Keep track of ticker in summary table
+    Dim summaryTable As Long
+    summaryTable = 2
     'Set initial row for current ws
     Dim lastRow As Long
     Dim i As Long
@@ -47,27 +50,28 @@ Sub AnalazyData():
             ClosePrice = ws.Cells(i, 6).Value
             YearlyChange = ClosePrice - OpenPrice
             'Check for division by 0
-            If OpePrice <> 0 Then
-                PercentChange = (PercentChange / OpenPrice) * 100
+            If OpenPrice <> 0 Then
+                PercentChange = (YearlyChange / OpenPrice) * 100
             Else
-                MsgBox ("Ope price is 0 and cannot be devided to get Percent Change")
+                PercentChange = 0
             End If
             
             'Add total volume
             totalVolume = totalVolume + ws.Cells(i, 7).Value
             
             'Print values and ticker name into Summary Table
-            ws.Range("I").Value = ticket
-            ws.Range("J").Value = YearlyChange
+            ws.Range("I" & summaryTable).Value = ticket
+            ws.Range("J" & summaryTable).Value = YearlyChange
             'Set color for YearlyChange where green is positive and red for negative values
             If (YearlyChange > 0) Then
-                ws.Range("J").Interior.ColorIndex = 4
+                ws.Range("J" & summaryTable).Interior.ColorIndex = 4
             ElseIf (YearlyChange <= 0) Then
-                ws.Range("J").Interior.ColorIndex = 3
+                ws.Range("J" & summaryTable).Interior.ColorIndex = 3
             End If
             
-            ws.Range("K").Value = (CStr(PercentChange) & "%")
-            ws.Range("L").Value = totalVolume
+            ws.Range("K" & summaryTable).Value = (CStr(PercentChange) & "%")
+            ws.Range("L" & summaryTable).Value = totalVolume
+            summaryTable = summaryTable + 1
             ' If the cell ticker is same, add volume.
         Else
             totalVolume = totalVolume + ws.Cells(i, 7).Value
