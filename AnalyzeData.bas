@@ -29,6 +29,7 @@ Sub AnalazyData():
         'Set variable for smallest % increase
         Dim MinPercent As Double
         Dim MinTicket As String
+        MinPercent = 0
         'Set variable for greatest total Volume
         Dim MaxtotalVolume As Double
         Dim totalVolume_ticket As String
@@ -103,6 +104,7 @@ Sub AnalazyData():
                     MaxtotalVolume = totalVolume
                     totalVolume_ticket = ticket
                 End If
+                
                 
                 'Reset values for new Ticket
                 YearlyChange = 0
