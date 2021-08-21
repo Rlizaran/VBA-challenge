@@ -22,6 +22,17 @@ Sub AnalazyData():
         'Set variable for PercentChange
         Dim PercentChange As Double
         PercentChange = 0
+        'Set variable for greatest % increase
+        Dim MaxPercent As Double
+        Dim MaxTicket As String
+        MaxPercent = 0
+        'Set variable for smallest % increase
+        Dim MinPercent As Double
+        Dim MinTicket As String
+        'Set variable for greatest total Volume
+        Dim MaxtotalVolume As Double
+        Dim totalVolume_ticket As String
+        MaxtotalVolume = 0
         
         '-----------------------------------------------------
         'Keep track of ticker in summary table
@@ -38,6 +49,14 @@ Sub AnalazyData():
         ws.Range("J1").Value = "Yearly Change"
         ws.Range("K1").Value = "Percent Change"
         ws.Range("L1").Value = "Total Stock Volume"
+        
+        'Bonus part add headers
+        ws.Range("O1").Value = "Ticker"
+        ws.Range("N2").Value = "Greatest % Increase"
+        ws.Range("N3").Value = "Greatest % Decrease"
+        ws.Range("N4").Value = "Greatest Total Volume"
+        ws.Range("P1").Value = "Value"
+        
         
         'Set initial OpenPrice and for loop to get the rest open prices
         OpenPrice = ws.Cells(2, 3).Value
@@ -69,10 +88,22 @@ Sub AnalazyData():
                 ElseIf (YearlyChange <= 0) Then
                     ws.Range("J" & summaryTable).Interior.ColorIndex = 3
                 End If
-                
                 ws.Range("K" & summaryTable).Value = (CStr(PercentChange) & "%")
                 ws.Range("L" & summaryTable).Value = totalVolume
                 summaryTable = summaryTable + 1
+                'Bonus part, populate summary table
+                If (PercentChange > MaxPercent) Then
+                    MaxPercent = PercentChange
+                    MaxTicket = ticket
+                ElseIf (PercentChange < MinPercent) Then
+                    MinPercent = PercentChange
+                    MinTicket = ticket
+                End If
+                If (totalVolume > MaxtotalVolume) Then
+                    MaxtotalVolume = totalVolume
+                    totalVolume_ticket = ticket
+                End If
+                
                 'Reset values for new Ticket
                 YearlyChange = 0
                 ClosePrice = 0
@@ -83,7 +114,14 @@ Sub AnalazyData():
                 totalVolume = totalVolume + ws.Cells(i, 7).Value
             End If
         Next i
-                
+        
+        ws.Range("P2").Value = (CStr(MaxPercent) & "%")
+        ws.Range("P3").Value = (CStr(MinPercent) & "%")
+        ws.Range("P4").Value = MaxtotalVolume
+        ws.Range("O2").Value = MaxTicket
+        ws.Range("O3").Value = MinTicket
+        ws.Range("O4").Value = totalVolume_ticket
+
     Next ws
     
 End Sub
