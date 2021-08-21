@@ -72,7 +72,12 @@ Sub AnalazyData():
             ws.Range("K" & summaryTable).Value = (CStr(PercentChange) & "%")
             ws.Range("L" & summaryTable).Value = totalVolume
             summaryTable = summaryTable + 1
-            ' If the cell ticker is same, add volume.
+            'Reset values for new Ticket
+            YearlyChange = 0
+            ClosePrice = 0
+            OpenPrice = ws.Cells(i + 1, 3)
+            PercentChange = 0
+            totalVolume = 0
         Else
             totalVolume = totalVolume + ws.Cells(i, 7).Value
         End If
