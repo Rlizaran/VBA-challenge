@@ -1,5 +1,7 @@
 # VBA-challenge
-The VBA of Wall Street. This script will automatically analyze real stock market data from a single sheet of excel
+The VBA of Wall Street. This script will automatically analyze real stock market data from a data set.
+
+Data set **Multiple_year_stock_data**
 
 First, it will get the ticker's name and initial open price. It will loop throughout the rows until the ticker's name changes.
 If the ticker's name is different, the for loop will stop and calculate the Yearly change by substracting the Open price to the last Close price.
