@@ -8,10 +8,8 @@ If Yearly Change is a positive number, it will fill the cell with green, but if 
 Then it will calculate the Percent Change by (Yearly Change / Open Price) * 100.
 Lastly, it will calculate the total stock volume by adding all the volumes of the ticker.
 
-Bonus Part included:
+### Bonus Part included:
 
-Get Greatest % Increase with ticket name and value
-
-Get Greatest % Decrease with ticket name and value
-
-Get Greatest Total Volume with ticket name and value
+* Get Greatest % Increase with ticket name and value
+* Get Greatest % Decrease with ticket name and value
+* Get Greatest Total Volume with ticket name and value
