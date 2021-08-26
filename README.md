@@ -1,9 +1,9 @@
 # VBA-challenge
-This script will automatically analyze real stock market data from a data set.
+This script will automatically analyze real stock market data from a dataset.
 
 The data set is compoused of seven columns: **ticker, data, open, high, low, close, vol**
 
-Data set name **Multiple_year_stock_data**
+Dataset name **Multiple_year_stock_data**
 
 The VBA script will loop through all the stocks for one year and output the following information:
 * The ticker symbol.
